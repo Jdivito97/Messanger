@@ -34,6 +34,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       conversationId,
       sender: conversationId ? null : user,
     };
+
     await postMessage(reqBody);
     setText('');
   };
@@ -47,6 +48,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
           placeholder="Type something..."
           value={text}
           name="text"
+          // onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
       </FormControl>

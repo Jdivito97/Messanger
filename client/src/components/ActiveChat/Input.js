@@ -48,7 +48,6 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
           placeholder="Type something..."
           value={text}
           name="text"
-          // onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
       </FormControl>

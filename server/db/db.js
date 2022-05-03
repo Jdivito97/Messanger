@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
-console.log("env", process.env.REACT_APP_DATABASE_URL);
+require("dotenv").config();
+
 const db = new Sequelize(process.env.REACT_APP_DATABASE_URL, {
   logging: false,
 });

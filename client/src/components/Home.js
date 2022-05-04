@@ -41,7 +41,6 @@ const Home = ({ user, logout }) => {
         newState.push(fakeConvo);
       }
     });
-
     setConversations(newState);
   };
 
@@ -51,6 +50,7 @@ const Home = ({ user, logout }) => {
 
   const saveMessage = async (body) => {
     const { data } = await axios.post("/api/messages", body);
+
     return data;
   };
 
@@ -62,14 +62,14 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = (body) => {
+  const postMessage = async (body) => {
     try {
-      const data = saveMessage(body);
+      const data = await saveMessage(body);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
       } else {
-        addMessageToConversation(data);
+        addMessageToConversation(data.message);
       }
 
       sendMessage(data, body);
@@ -79,41 +79,41 @@ const Home = ({ user, logout }) => {
   };
 
   const addNewConvo = useCallback(
-    (recipientId, message) => {
-      conversations.forEach((convo) => {
-        if (convo.otherUser.id === recipientId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-          convo.id = message.conversationId;
-        }
-      });
-      setConversations(conversations);
+    (recipientId, data) => {
+      setConversations((prev) =>
+        prev.map((convo) => {
+          if (convo.otherUser.id === recipientId) {
+            convo.latestMessageText = data.text;
+            convo.id = data.conversationId;
+            convo.messages = [...convo.messages, data];
+          }
+          return convo;
+        })
+      );
     },
-    [setConversations, conversations],
+
+    [setConversations, conversations]
   );
+
   const addMessageToConversation = useCallback(
     (data) => {
       // if sender isn't null, that means the message needs to be put in a brand new convo
-      const { message, sender = null } = data;
+      const { sender = null } = data;
       if (sender !== null) {
-        const newConvo = {
-          id: message.conversationId,
-          otherUser: sender,
-          messages: [message],
-        };
-        newConvo.latestMessageText = message.text;
-        setConversations((prev) => [newConvo, ...prev]);
+        addNewConvo();
       }
 
-      conversations.forEach((convo) => {
-        if (convo.id === message.conversationId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-        }
-      });
-      setConversations(conversations);
+      setConversations((prev) =>
+        prev.map((convo) => {
+          if (convo.id === data.conversationId) {
+            convo.latestMessageText = data.text;
+            convo.messages = [...convo.messages, data];
+          }
+          return convo;
+        })
+      );
     },
-    [setConversations, conversations],
+    [addNewConvo, conversations]
   );
 
   const setActiveChat = (username) => {
@@ -130,7 +130,7 @@ const Home = ({ user, logout }) => {
         } else {
           return convo;
         }
-      }),
+      })
     );
   }, []);
 
@@ -144,7 +144,7 @@ const Home = ({ user, logout }) => {
         } else {
           return convo;
         }
-      }),
+      })
     );
   }, []);
 
@@ -182,6 +182,9 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
+        data.map((convo) => {
+          return convo.messages.reverse();
+        });
         setConversations(data);
       } catch (error) {
         console.error(error);
@@ -197,7 +200,6 @@ const Home = ({ user, logout }) => {
       await logout(user.id);
     }
   };
-
   return (
     <>
       <Button onClick={handleLogout}>Logout</Button>

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { ReactComponent as BubbleSVG } from "./Svg/bubble.svg";
 import {
   Grid,
   Box,
@@ -7,8 +8,8 @@ import {
   Button,
   FormControl,
   TextField,
-} from '@material-ui/core';
-
+} from "@material-ui/core";
+import "./Signup_Login.css";
 const Login = ({ user, login }) => {
   const history = useHistory();
 
@@ -23,47 +24,63 @@ const Login = ({ user, login }) => {
   };
 
   useEffect(() => {
-    if (user && user.id) history.push('/home');
+    if (user && user.id) history.push("/home");
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Link href="/register" to="/register">
-            <Button>Register</Button>
-          </Link>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
+    <>
+      <div className="banner">
+        <BubbleSVG className="svg" />
+        <h4>Converse with anyone, with any language</h4>
+      </div>
+      <Grid container justifyContent="center">
+        <Box>
+          <Grid className="switchPage" container item>
+            <Typography className="tyopgraphy">
+              Don't have an account?
+            </Typography>
+            <Link className="link" href="/register" to="/register">
+              <Button className="topBtn">Create account</Button>
+            </Link>
+          </Grid>
+          <form className="inputs" onSubmit={handleLogin}>
+            <h1 className="inputHeader">Welcome Back!</h1>
             <Grid>
+              <Grid>
+                <FormControl margin="normal" required>
+                  <TextField
+                    className="input"
+                    aria-label="username"
+                    label="Username"
+                    name="username"
+                    type="text"
+                  />
+                </FormControl>
+              </Grid>
               <FormControl margin="normal" required>
                 <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
+                  className="input"
+                  label="Password"
+                  aria-label="password"
+                  type="password"
+                  name="password"
                 />
               </FormControl>
+              <Grid>
+                <Button
+                  className="bottomBtn"
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                >
+                  Login
+                </Button>
+              </Grid>
             </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
+          </form>
+        </Box>
+      </Grid>
+    </>
   );
 };
 

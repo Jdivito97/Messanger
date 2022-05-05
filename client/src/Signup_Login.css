@@ -1,0 +1,242 @@
+/* login/signup toggle */
+.switchPage {
+  position: fixed;
+  width: 336px !important;
+  height: 54px;
+  left: 70%;
+  bottom: 87.5vh;
+  margin: 5px;
+  padding: 0;
+}
+.tyopgraphy {
+  position: relative;
+  height: 19px;
+  right: 5%;
+  top: calc(50% - 19px / 2 + 1.38px);
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #b0b0b0;
+}
+.topBtn {
+  color: #3a8dff !important;
+  position: absolute;
+  width: 140px;
+  height: 54px;
+  background: #ffffff;
+  box-shadow: 0px 2px 12px rgba(74, 106, 149, 0.2);
+  border-radius: 5px;
+}
+.link {
+  text-decoration: none;
+}
+/* side banner */
+.banner {
+  position: absolute;
+  min-height: 100vh;
+  width: 425px;
+  background: linear-gradient(
+      180deg,
+      rgba(58, 140, 255, 0.85),
+      rgba(134, 185, 255, 0.8),
+      rgba(134, 185, 255, 5),
+      rgba(134, 185, 255, 5),
+      rgba(134, 185, 255, 5)
+    ),
+    url(./Img/bg-img.png);
+}
+.banner h4 {
+  position: absolute;
+  text-align: center;
+  height: 80px;
+  width: 269px;
+  left: 18.5%;
+  top: 41.5%;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 40px;
+  color: #ffffff;
+}
+
+.svg {
+  position: absolute;
+  top: 31.5%;
+  left: 50%;
+  margin-left: -7%;
+}
+/* sign-up/login section */
+.inputs {
+  position: absolute;
+  max-width: 380px;
+  max-height: 424px;
+  left: 50%;
+  top: 15%;
+}
+.inputHeader {
+  position: relative;
+  height: 40px;
+  left: 5%;
+  top: calc(50% - 150px / 2 - 192px);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 40px;
+  margin-bottom: 10px !important;
+  color: #000000;
+}
+
+.input {
+  position: relative;
+  height: 66px;
+  width: 380px;
+  left: 0%;
+  right: 0%;
+  top: 12.26%;
+  bottom: 72.17%;
+  margin: 5px !important;
+}
+.input label {
+  position: relative;
+  height: 19px;
+  left: 1.32%;
+  right: 80.79%;
+  bottom: 10px;
+}
+
+.bottomBtn {
+  color: #ffffff !important;
+  position: absolute;
+  height: 56px;
+  width: 160px;
+  left: 33.75%;
+  right: 33.12%;
+  top: calc(50% - 24px / 2 + 2px);
+  margin-top: 20px !important;
+
+  background: #3a8dff !important;
+  border-radius: 3px;
+}
+/* Responsiveness CSS */
+
+@media (max-width: 1000px) {
+  .banner {
+    width: 325px;
+  }
+
+  .banner h4 {
+    font-size: 20px;
+    left: 10%;
+  }
+  .switchPage {
+    left: 65%;
+  }
+}
+
+@media (max-width: 900px) {
+  .switchPage {
+    left: 50%;
+  }
+
+  .input {
+    max-width: 280px;
+  }
+  .inputHeader {
+    position: relative;
+    bottom: 0px;
+    font-size: 18px;
+  }
+  .bottomBtn {
+    left: 25.5%;
+  }
+}
+@media (max-width: 700px) {
+  .switchPage {
+    left: 55%;
+    width: 266px !important;
+  }
+  .topBtn {
+    width: 70px !important;
+    height: 50px;
+
+    font-size: 12px !important;
+  }
+  .tyopgraphy {
+    font-size: 16px !important;
+  }
+
+  .input {
+    height: 70px;
+    max-width: 200px;
+  }
+  .inputHeader {
+    position: relative;
+    bottom: 0px;
+    font-size: 18px;
+  }
+  .input label {
+    font-size: 15px;
+  }
+  .bottomBtn {
+    width: 100px !important;
+    height: 50px;
+    font-size: 12px !important;
+    left: 25.5%;
+  }
+}
+@media (max-width: 650px) {
+  .banner {
+    width: 250px;
+  }
+  .banner h4 {
+    font-size: 15px;
+    left: -3%;
+  }
+  .svg {
+    left: 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .input {
+    max-width: 140px;
+  }
+  .bottomBtn {
+    width: 75px !important;
+    height: 50px;
+    font-size: 12px !important;
+    left: 22.5%;
+  }
+
+  .switchPage {
+    left: 55%;
+    width: 175px !important;
+  }
+  .topBtn {
+    width: 20px !important;
+    height: 40px;
+
+    font-size: 12px !important;
+  }
+  .tyopgraphy {
+    font-size: 8px !important;
+  }
+}
+@media (max-width: 500px) {
+  .banner {
+    display: inline-block;
+    word-wrap: normal;
+    width: 175px;
+  }
+  .bannerText {
+    width: 130px;
+  }
+  .banner h4 {
+    width: 150px;
+    font-size: 25px;
+    left: 5%;
+  }
+  .svg {
+    left: 40%;
+  }
+}

@@ -56,10 +56,10 @@ const Login = ({ user, login }) => {
                 <FormControl margin="normal" required>
                   <TextField
                     className={classes.input}
-                    label="E-mail address"
-                    aria-label="e-mail address"
-                    type="email"
-                    name="email"
+                    aria-label="username"
+                    label="Username"
+                    name="username"
+                    type="text"
                   />
                 </FormControl>
               </Grid>

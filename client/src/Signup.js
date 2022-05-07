@@ -10,9 +10,10 @@ import {
   TextField,
   FormHelperText,
 } from "@material-ui/core";
-import "./Signup_Login.css";
+import { StartupStyles } from "./StartupStyles";
 const Signup = ({ user, register }) => {
   const history = useHistory();
+  const classes = StartupStyles();
 
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
@@ -38,28 +39,32 @@ const Signup = ({ user, register }) => {
 
   return (
     <>
-      <div className="banner">
-        <BubbleSVG className="svg" />
-        <h4>Converse with anyone, with any language</h4>
-      </div>
-      <Grid className="gridContainer" container justifyContent="center">
+      <Box className={classes.banner}>
+        <BubbleSVG className={classes.svg} />
+        <Typography className={classes.bannerText}>
+          Converse with anyone, with any language
+        </Typography>
+      </Box>
+      <Grid container justifyContent="center">
         <Box>
-          <Grid className="switchPage" container item>
-            <Typography className="tyopgraphy">
+          <Grid className={classes.switchPage} container item>
+            <Typography className={classes.switchText}>
               Already have an account?
             </Typography>
-            <Link className="link" href="/login" to="/login">
-              <Button className="topBtn">Login</Button>
+            <Link className={classes.link} href="/login" to="/login">
+              <Button className={classes.topBtn}>Login</Button>
             </Link>
           </Grid>
 
-          <form className="inputs" onSubmit={handleRegister}>
-            <h1 className="inputHeader">Create an Account.</h1>{" "}
+          <form className={classes.inputs} onSubmit={handleRegister}>
+            <Typography className={classes.inputHeader}>
+              Create an Account.
+            </Typography>{" "}
             <Grid>
               <Grid>
                 <FormControl>
                   <TextField
-                    className="input"
+                    className={classes.input}
                     aria-label="username"
                     label="Username"
                     name="username"
@@ -71,7 +76,7 @@ const Signup = ({ user, register }) => {
               <Grid>
                 <FormControl>
                   <TextField
-                    className="input"
+                    className={classes.input}
                     label="E-mail address"
                     aria-label="e-mail address"
                     type="email"
@@ -83,7 +88,7 @@ const Signup = ({ user, register }) => {
               <Grid>
                 <FormControl error={!!formErrorMessage.confirmPassword}>
                   <TextField
-                    className="input"
+                    className={classes.input}
                     aria-label="password"
                     label="Password"
                     type="password"
@@ -99,7 +104,7 @@ const Signup = ({ user, register }) => {
               <Grid>
                 <FormControl error={!!formErrorMessage.confirmPassword}>
                   <TextField
-                    className="input"
+                    className={classes.input}
                     label="Confirm Password"
                     aria-label="confirm password"
                     type="password"
@@ -113,7 +118,7 @@ const Signup = ({ user, register }) => {
                 </FormControl>
               </Grid>
               <Button
-                className="bottomBtn"
+                className={classes.bottomBtn}
                 type="submit"
                 variant="contained"
                 size="large"

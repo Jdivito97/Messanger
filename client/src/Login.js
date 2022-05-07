@@ -9,9 +9,11 @@ import {
   FormControl,
   TextField,
 } from "@material-ui/core";
-import "./Signup_Login.css";
+import { StartupStyles } from "./StartupStyles";
+
 const Login = ({ user, login }) => {
   const history = useHistory();
+  const classes = StartupStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -29,37 +31,41 @@ const Login = ({ user, login }) => {
 
   return (
     <>
-      <div className="banner">
-        <BubbleSVG className="svg" />
-        <h4>Converse with anyone, with any language</h4>
-      </div>
+      <Box className={classes.banner}>
+        <BubbleSVG className={classes.svg} />
+        <Typography className={classes.bannerText}>
+          Converse with anyone, with any language
+        </Typography>
+      </Box>
       <Grid container justifyContent="center">
         <Box>
-          <Grid className="switchPage" container item>
-            <Typography className="tyopgraphy">
+          <Grid className={classes.switchPage} container item>
+            <Typography className={classes.switchText}>
               Don't have an account?
             </Typography>
-            <Link className="link" href="/register" to="/register">
-              <Button className="topBtn">Create account</Button>
+            <Link className={classes.link} href="/register" to="/register">
+              <Button className={classes.topBtn}>Create account</Button>
             </Link>
           </Grid>
-          <form className="inputs" onSubmit={handleLogin}>
-            <h1 className="inputHeader">Welcome Back!</h1>
+          <form className={classes.inputs} onSubmit={handleLogin}>
+            <Typography className={classes.inputHeader}>
+              Welcome Back!
+            </Typography>
             <Grid>
               <Grid>
                 <FormControl margin="normal" required>
                   <TextField
-                    className="input"
-                    aria-label="username"
-                    label="Username"
-                    name="username"
-                    type="text"
+                    className={classes.input}
+                    label="E-mail address"
+                    aria-label="e-mail address"
+                    type="email"
+                    name="email"
                   />
                 </FormControl>
               </Grid>
               <FormControl margin="normal" required>
                 <TextField
-                  className="input"
+                  className={classes.input}
                   label="Password"
                   aria-label="password"
                   type="password"
@@ -68,7 +74,7 @@ const Login = ({ user, login }) => {
               </FormControl>
               <Grid>
                 <Button
-                  className="bottomBtn"
+                  className={classes.bottomBtn}
                   type="submit"
                   variant="contained"
                   size="large"

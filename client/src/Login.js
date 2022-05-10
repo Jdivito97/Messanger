@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-} from '@material-ui/core';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import Banner from "./components/Startup/Banner";
+import SwitchPage from "./components/Startup/SwitchPage";
+import LoginInputs from "./components/Startup/LoginInputs";
+import { Grid, Box } from "@material-ui/core";
+import { StartupStyles } from "./components/Startup/StartupStyles";
 
 const Login = ({ user, login }) => {
   const history = useHistory();
+  const classes = StartupStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -23,47 +21,26 @@ const Login = ({ user, login }) => {
   };
 
   useEffect(() => {
-    if (user && user.id) history.push('/home');
+    if (user && user.id) history.push("/home");
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Link href="/register" to="/register">
-            <Button>Register</Button>
-          </Link>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
+    <>
+      <Banner />
+      <Grid container justifyContent="center">
+        <Box>
+          <SwitchPage
+            switchPageText="Don't have an account?"
+            buttonText="Create account"
+            href="/register"
+            to="/register"
+          />
+          <form className={classes.inputs} onSubmit={handleLogin}>
+            <LoginInputs inputHeader="Welcome back!" buttonText="Login" />
+          </form>
+        </Box>
+      </Grid>
+    </>
   );
 };
 

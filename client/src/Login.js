@@ -1,15 +1,10 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { ReactComponent as BubbleSVG } from "./Svg/bubble.svg";
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-} from "@material-ui/core";
-import { StartupStyles } from "./StartupStyles";
+import { useHistory } from "react-router-dom";
+import Banner from "./components/Startup/Banner";
+import SwitchPage from "./components/Startup/SwitchPage";
+import LoginInputs from "./components/Startup/LoginInputs";
+import { Grid, Box } from "@material-ui/core";
+import { StartupStyles } from "./components/Startup/StartupStyles";
 
 const Login = ({ user, login }) => {
   const history = useHistory();
@@ -31,58 +26,17 @@ const Login = ({ user, login }) => {
 
   return (
     <>
-      <Box className={classes.banner}>
-        <BubbleSVG className={classes.svg} />
-        <Typography className={classes.bannerText}>
-          Converse with anyone, with any language
-        </Typography>
-      </Box>
+      <Banner />
       <Grid container justifyContent="center">
         <Box>
-          <Grid className={classes.switchPage} container item>
-            <Typography className={classes.switchText}>
-              Don't have an account?
-            </Typography>
-            <Link className={classes.link} href="/register" to="/register">
-              <Button className={classes.topBtn}>Create account</Button>
-            </Link>
-          </Grid>
+          <SwitchPage
+            switchPageText="Don't have an account?"
+            buttonText="Create account"
+            href="/register"
+            to="/register"
+          />
           <form className={classes.inputs} onSubmit={handleLogin}>
-            <Typography className={classes.inputHeader}>
-              Welcome Back!
-            </Typography>
-            <Grid>
-              <Grid>
-                <FormControl margin="normal" required>
-                  <TextField
-                    className={classes.input}
-                    aria-label="username"
-                    label="Username"
-                    name="username"
-                    type="text"
-                  />
-                </FormControl>
-              </Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  className={classes.input}
-                  label="Password"
-                  aria-label="password"
-                  type="password"
-                  name="password"
-                />
-              </FormControl>
-              <Grid>
-                <Button
-                  className={classes.bottomBtn}
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                >
-                  Login
-                </Button>
-              </Grid>
-            </Grid>
+            <LoginInputs inputHeader="Welcome back!" buttonText="Login" />
           </form>
         </Box>
       </Grid>

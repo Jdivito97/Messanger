@@ -166,15 +166,21 @@ export const StartupStyles = makeStyles({
 
   "@media (max-width: 500px)": {
     switchPage: {
-      left: "25%",
+      display: "flex",
+      flexDirection: "column",
+      flexWrap: "wrap",
+      left: "32%",
       width: "150px",
     },
+
     topBtn: {
-      width: "100px",
       fontSize: "13px",
     },
     switchText: {
       fontSize: "11px",
+      top: "-5%",
+      left: "1%",
+      width: "140px",
     },
 
     input: {
@@ -182,8 +188,7 @@ export const StartupStyles = makeStyles({
     },
 
     bottomBtn: {
-      left: "20%",
-      width: "120px",
+      left: "12%",
     },
   },
 });

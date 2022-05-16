@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   FormControl,
   FilledInput,
@@ -11,6 +12,8 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { MdContentCopy } from "react-icons/md";
 import { VscSmiley } from "react-icons/vsc";
+require("dotenv").config();
+
 const useStyles = makeStyles(() => ({
   root: {
     justifySelf: "flex-end",
@@ -32,31 +35,29 @@ const useStyles = makeStyles(() => ({
     color: "#bfc9db",
   },
 }));
-
 const MessageInput = ({ otherUser, conversationId, user, postMessage }) => {
-  const imgCloudURL = `https://api.cloudinary.com/v1_1/dtvk7vxeq/image/upload`;
+  const imgCloudURL = process.env.REACT_APP_CLOUDINARY_URL;
   const classes = useStyles();
   const [text, setText] = useState("");
+  const [fileCount, setFileCount] = useState(0);
 
   const handleChange = (event) => {
     setText(event.target.value);
   };
-
   const getImgURLs = async (files) => {
     const fileArray = Object.values(files);
-
+    const instance = axios.create();
     const altURLs = await Promise.all(
       fileArray.map((file) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "uploadIMG");
 
-        return axios.create().post(imgCloudURL, formData);
+        return instance.post(imgCloudURL, formData);
       })
     );
     return altURLs;
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
@@ -79,6 +80,11 @@ const MessageInput = ({ otherUser, conversationId, user, postMessage }) => {
     await postMessage(reqBody);
     setText("");
     formElements["filesArray"].value = null;
+    setFileCount(0);
+  };
+
+  const displayStagedFiles = (e) => {
+    setFileCount(e.target.files.length);
   };
 
   return (
@@ -98,19 +104,20 @@ const MessageInput = ({ otherUser, conversationId, user, postMessage }) => {
               </IconButton>
               <Input
                 className={classes.muiInput}
+                onChange={displayStagedFiles}
                 type="file"
                 name="filesArray"
                 accept="image/*"
                 id="icon-button-file"
                 inputProps={{
-                  display: "none",
                   multiple: true,
                 }}
               />
               <InputLabel htmlFor="icon-button-file">
                 <IconButton aria-label="upload picture" component="span">
-                  <MdContentCopy className={classes.imgSelect} />
+                  <MdContentCopy className={classes.imgSelect} type="file" />
                 </IconButton>
+                {fileCount > 0 && fileCount}
               </InputLabel>
             </InputAdornment>
           }

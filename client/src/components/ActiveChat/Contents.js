@@ -4,12 +4,21 @@ import Images from "./Images";
 const Contents = ({ text, attachments, bubbles, texts }) => {
   return (
     <>
-      {attachments.length > 1 && <Images attachments={attachments} />}
-
-      {attachments.length === 1 && <Images attachments={attachments} />}
-      <Box className={bubbles}>
-        {text && <Typography className={texts}>{text}</Typography>}
-      </Box>
+      {attachments.length === 1 ? (
+        <>
+          <Images attachments={attachments} />
+          <Box className={bubbles}>
+            {text && <Typography className={texts}>{text}</Typography>}
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box className={bubbles}>
+            {text && <Typography className={texts}>{text}</Typography>}
+          </Box>
+          <Images attachments={attachments} />
+        </>
+      )}
     </>
   );
 };

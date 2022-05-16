@@ -5,3 +5,4 @@ export { default as MessageInput } from "./Input";
 export { default as Header } from "./Header";
 export { default as Messages } from "./Messages";
 export { default as Contents } from "./Contents";
+require("dotenv").config();

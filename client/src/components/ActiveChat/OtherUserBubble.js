@@ -6,8 +6,13 @@ import Contents from "./Contents";
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   avatar: {
+    position: "relative",
+    top: "35px",
+    right: "40px",
     height: 30,
     width: 30,
     marginRight: 11,

@@ -37,6 +37,7 @@ const useStyles = makeStyles(() => ({
 }));
 const MessageInput = ({ otherUser, conversationId, user, postMessage }) => {
   const imgCloudURL = process.env.REACT_APP_CLOUDINARY_URL;
+  const instance = axios.create();
   const classes = useStyles();
   const [text, setText] = useState("");
   const [fileCount, setFileCount] = useState(0);
@@ -46,7 +47,6 @@ const MessageInput = ({ otherUser, conversationId, user, postMessage }) => {
   };
   const getImgURLs = async (files) => {
     const fileArray = Object.values(files);
-    const instance = axios.create();
     const altURLs = await Promise.all(
       fileArray.map((file) => {
         const formData = new FormData();

@@ -69,7 +69,7 @@ export const StartupStyles = makeStyles({
     maxWidth: "380px",
     maxHeight: "424px",
     left: "50%",
-    top: "30%",
+    top: "25%",
   },
 
   inputHeader: {
